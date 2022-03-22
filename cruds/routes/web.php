@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +18,13 @@ Route::get('/', function () {
 })->name('main');
 
 
-Auth::routes();
 Route::get('/home','homecontroller@index')->name('main');
 
-Route::get('/cruds','ctudcontroller@index');
-Route::post('/cruds','ctudcontroller@index');
-Route::get('/cruds/(id)','ctudcontroller@destroy');
+Route::get('/crud','ctudcontroller@index');
+Route::post('/crud','ctudcontroller@savedemo');
+Route::put('users/{id}', function ($id) {
+    ('/crud/(id)');
+});
+Route::delete('users/{id}', function ($id) {
+    ('/crud/(id)');
+});

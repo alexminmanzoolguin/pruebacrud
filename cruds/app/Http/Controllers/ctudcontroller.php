@@ -12,11 +12,6 @@ class ctudcontroller extends Controller
         return view('principal');
     }
 
-    public function __construct ()
-    {
-        $this->middleware('auth');
-
-}
     public function index(Request $request)
     {
         $cruds = $request->user()->cruds()->orderBy('created_at', 'des')->get();
@@ -41,7 +36,7 @@ class ctudcontroller extends Controller
     }
     public function editView($id)
     {
-        $cruds= cruds ::find($id);
+        $cruds= DB::find($id);
 
         if (empty($curds)) {
             return redirect('/cruds');
@@ -59,32 +54,32 @@ class ctudcontroller extends Controller
             'email' => 'required|max:255'
         ]);
 
-        $crud = cruds::find($id);
+        $cruds =  DB::find($id);
 
         if (empty($task)) {
             return redirect('/crud');
         }
 
-        $this->authorize('verify', $crud);
+        $this->authorize('verify', $cruds);
 
-        $crud->nombre = $request->nombre;
-        $crud->cargo = $request->cargo;
-        $crud->save();
+        $cruds->nombre = $request->nombre;
+        $cruds->cargo = $request->cargo;
+        $cruds->save();
         return redirect('/crud');
     }
 
 
     public function destroy($id)
     {
-        $crud= cruds::find($id);
+        $cruds= DB::find($id);
 
-        if (empty($crud)) {
+        if (empty($cruds)) {
             return redirect('/crud');
         }
 
-        $this->authorize('verify', $crud);
+        $this->authorize('verify', $cruds);
 
-        $crud->delete();
+        $cruds->delete();
         return redirect('/crud');
     }
 
